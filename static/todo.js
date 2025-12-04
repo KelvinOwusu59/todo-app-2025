@@ -91,7 +91,7 @@ function loadTasks() {
 // remove task function
 function removeTask(taskId) {
   console.log(`Removing task with ID: ${taskId}`);
-  fetch(`/remove/${taskId}`, { method: 'GET' })
+  fetch(`/api/v1/tasks/${taskId}`, { method: 'DELETE' })
     .then(response => {
       if (response.ok) {
         document.getElementById(`task-${taskId}`).closest('li').remove();

@@ -60,6 +60,16 @@ def api_toggle_task(task_id):
 
     return {"task": task.to_dict()}, 200
 
+@main_blueprint.route('/api/v1/tasks/<int:task_id>', methods=['DELETE'])
+@login_required
+def api_delete_task(task_id):
+    task = Task.query.get(task_id)
+    if task is None:
+        return {"error": "Task not found"}, 404
+    db.session.delete(task)
+    db.session.commit()
+    return {"message": "Task deleted"}, 200
+
 @main_blueprint.route('/remove/<int:task_id>')
 @login_required
 def remove(task_id):
