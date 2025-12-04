@@ -15,6 +15,7 @@ function addTaskToList(task) {
   const taskList = document.getElementById('task-list');
   const li = document.createElement('li');
   li.textContent = task.title;
+  li.classList.add(task.priority); // Add priority class for styling
   li.innerHTML += ` <a href="#" id="task-${task.id}" class="remove-btn" onclick="removeTask(${task.id})">🗑️</a>`;
   taskList.appendChild(li);
 }
@@ -25,7 +26,9 @@ taskForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
   const taskInput = document.getElementById('new-task');
+  const priorityInput = document.getElementById('priority');
   const taskTitle = taskInput.value.trim();
+  const priority = priorityInput.value;
 
   if (taskTitle) {
     fetch('/api/v1/tasks', {
@@ -33,13 +36,14 @@ taskForm.addEventListener('submit', (event) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ title: taskTitle })
+      body: JSON.stringify({ title: taskTitle, priority })
     })
       .then(response => response.json())
       .then(data => {
         console.log('Task added:', data);
-        taskInput.value = ''; // Clear the input
-        addTaskToList(data.task); // Add the new task to the list
+        taskInput.value = '';
+        priorityInput.value = 'low';
+        addTaskToList(data.task);
       });
   }
 });

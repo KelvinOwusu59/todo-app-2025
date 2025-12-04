@@ -67,4 +67,16 @@ body {
     text-decoration: line-through;
     color: #aaa;
   }
-  
+
+  li.high {
+    background-color: #ffdddd;
+    border-left: 5px solid #ff0000;
+  }
+  li.medium {
+    background-color: #fff8dc;
+    border-left: 5px solid #ffd700;
+  }
+  li.low {
+    background-color: #ddffdd;
+    border-left: 5px solid #008000;
+  }

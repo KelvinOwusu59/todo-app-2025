@@ -34,7 +34,7 @@ def api_get_tasks():
 @login_required
 def api_create_task():
     data = request.get_json()
-    new_task = Task(title=data['title'], user_id=current_user.id)
+    new_task = Task(title=data['title'], user_id=current_user.id, priority=data.get('priority', 'low'))
     db.session.add(new_task)
     db.session.commit()
     return {

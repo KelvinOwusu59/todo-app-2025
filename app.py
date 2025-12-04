@@ -1,5 +1,3 @@
-
-
 from flask import Flask
 from views import main_blueprint
 from auth import auth_blueprint
@@ -10,7 +8,7 @@ import os
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("postgres", "postgresql", 1)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'super-secret-key'
 db.init_app(app)
 
 login_manager = LoginManager(app)

@@ -12,6 +12,11 @@
     <form id="task-form" method="POST">
         <div class="input-section">
         <input type="text" id="new-task" name="task-text" placeholder="Add a new task..." />
+        <select id="priority" name="priority">
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low" selected>Low</option>
+        </select>
         <button id="add-task-btn">Add Task</button>
         </div>
     </form>

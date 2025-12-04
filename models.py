@@ -24,13 +24,14 @@ class Task(db.Model):
     title = db.Column(db.String(200), nullable=False)
     status = db.Column(db.String(20), default='not-completed')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    priority = db.Column(db.String(10), default='low')  # Add priority field
 
     def toggle(self):
         """Mark the task as done/undone."""
         self.status = 'completed' if self.status == 'not-completed' else 'not-completed'
 
     def __repr__(self):
-        return f"<Task id={self.id} title='{self.title}' status={self.status}>"
+        return f"<Task id={self.id} title='{self.title}' status={self.status} priority={self.priority}>"
     
     def to_dict(self):
         """Convert task to dictionary."""
@@ -38,5 +39,6 @@ class Task(db.Model):
             "id": self.id,
             "title": self.title,
             "status": self.status,
-            "user_id": self.user_id
+            "user_id": self.user_id,
+            "priority": self.priority
         }
