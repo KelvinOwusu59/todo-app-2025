@@ -49,7 +49,13 @@ def api_toggle_task(task_id):
     if task is None:
         return {"error": "Task not found"}, 404
 
-    task.toggle()
+    data = request.get_json()
+    if 'title' in data:
+        task.title = data['title']
+    if 'priority' in data:
+        task.priority = data['priority']
+    if not ('title' in data or 'priority' in data):
+        task.toggle()
     db.session.commit()
 
     return {"task": task.to_dict()}, 200
